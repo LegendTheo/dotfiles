@@ -1,0 +1,234 @@
+# # ~/.config/starship.toml
+
+# This is my main config baby
+
+# format = '$all$directory$battery$character'
+
+
+# right_format = """$battery
+# """
+
+# [battery]
+# # want $battery too
+# [[battery.display]]
+# threshold = 101
+# # style = 'white'
+# full_symbol = "🖥️" 
+
+# Use two lines for the prompt
+add_newline = true
+
+# # Disable the default prompt order
+format = """
+[](#FEF5ED)\
+$username\
+$hostname\
+${custom.os_wsl}\
+$os\
+$conda\
+$python\
+[](inverted fg:#FEF5ED)\
+[](fg:#516BEB)\
+${custom.cpu_mem}\
+[](inverted #516BEB)\
+[](fg:#575656)\
+${cmd_duration}\
+[](fg:#575656)\
+${fill}${custom.giturl}$git_branch$git_status$git_metrics${custom.git_end_format}
+[╭]()\
+[─]()\
+$shell\
+$battery\
+$time\
+$directory
+[╰]()\
+[─ ]()\
+$sudo\
+$status\
+""" 
+
+# right_format = """
+# $fill\
+# $git_branch\
+# $git_status\
+# git_metrics\
+# """
+
+[fill]
+symbol = " "
+
+
+[custom.os_wsl]
+command = """echo "WSL at " """
+when = """test -n "${WSLENV}" """
+shell = 'bash'
+style = "fg:#000000 bg:#FEF5ED"
+os = "linux"
+
+[os]
+format = '[$symbol ]($style)'
+disabled = false
+style = "fg:#000000 bg:#FEF5ED"
+# when = 'test -z $WSLENV'
+# shell = 'bash'
+
+[conda]
+format = "[](inverted fg:#FEF5ED)[](fg:#FEF5ED)[$symbol $environment]($style)"
+symbol = ""
+ignore_base = false
+style = "fg:#000000 bg:#FEF5ED"
+
+[os.symbols]
+Ubuntu = ""
+
+[python]
+format = '[](inverted fg:#FEF5ED)[](fg:#FEF5ED)[$symbol $virtualenv]($style)'
+detect_files = []
+detect_extensions = []
+
+[custom.cpu_mem]
+format = '[$symbol ($output) $symbol ]($style)'
+command = '''echo -n "CPU: $(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5); printf "%0.2f", usage }')% | MEM: $(free -m | awk 'NR==2{printf "%s/%sMB", $3,$2 }') "'''
+shell = "bash"
+when = "true"
+style = "fg:#FFFFFF bg:#516BEB"
+symbol = ""
+
+[cmd_duration]
+format = '[$duration]($style)'
+min_time = 0
+style = "fg:#d6deeb bg:#575656"
+
+[custom.giturl]
+# disabled = true
+description = "Display symbol for remote Git server"
+# command = "check-git-remote"
+command = """
+GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$GIT_REMOTE" =~ "github" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "codecommit" ]]; then
+    GIT_REMOTE_SYMBOL="󰸏"
+elif [[ "$GIT_REMOTE" =~ "git" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+else
+    GIT_REMOTE_SYMBOL=" "
+fi
+echo "$GIT_REMOTE_SYMBOL "
+"""
+
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+shell = ["bash", "--noprofile", "--norc"]
+format = "[[](fg:#17D7A0)$output  ]($style)"
+style = "bg:#17D7A0 fg:#011627"
+
+# [custom.giturl-pwsh]
+# # disabled = true
+# description = "Display symbol for remote Git server (pwsh)"
+# command = """
+# $gitRemote = git ls-remote --get-url
+# $symbol = ' ' # If no Git Remote is returned.
+# switch -regex ($gitRemote) {\
+#     'github'    { $symbol = ' ' }\
+#     'gitlab'    { $symbol = ' ' }\
+#     'bitbucket' { $symbol = ' ' }\
+#      Default    { $symbol = ' ' }\
+# }
+# echo $symbol
+# """
+# when = "git rev-parse --is-inside-work-tree"
+# shell = ["pwsh", "-NoProfile", "-Command", "-"]
+# format = "[$output ]($style)"
+
+
+[git_branch]
+format = "[$symbol $branch(:$remote_branch)]($style)"
+style = "bg:#17D7A0 fg:#011627"
+symbol = ""
+
+[git_metrics]
+format = "([↑$added ]($added_style))([↓$deleted ]($deleted_style))"
+disabled = false
+added_style = "bg:#17D7A0 fg:#011627"
+deleted_style = "bg:#17D7A0 fg:#011627"
+only_nonzero_diffs = false
+
+[git_status]
+# This needs work
+format = '([ $all_status $ahead_behind ]($style))'
+style = "bg:#17D7A0 fg:#011627"
+up_to_date = "✓"
+disabled = false
+windows_starship = '/mnt/c/Users/LegendTheo/starship.exe'
+
+[custom.git_end_format]
+command = " "
+# description = "Ends formatting for the git segment"
+# command = "echo yay "
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+shell = ["bash", "--noprofile", "--norc"]
+format = "[](fg:#17D7A0)[$output ]($style)" 
+
+[time]
+format = '[$time]($style) '
+time_format = "%R"
+disabled = false
+style = "#FFFFFF"
+
+[shell]
+fish_indicator = '  '
+powershell_indicator = ' ❯_'
+bash_indicator = ' 🔨 '
+style = 'bold #516BEB'
+disabled = false
+
+[username]
+format = '[$user ]($style)'
+style_user = "fg:#000000 bg:#FEF5ED"
+style_root = "fg: bold-red bg:$FEF5ED"
+
+[hostname]
+format = '[$ssh_symbol $hostname on ]($style)'
+style = "fg:#000000 bg:#FEF5ED"
+ssh_symbol = ''
+
+[directory]
+format = '[| $path]($style)[$read_only]($read_only_style) '
+truncation_length = 3
+home_symbol = ''
+before_repo_root_style = "dimmed #FFFFFF"
+repo_root_style = 'bold italic underline #FFFFFF'
+style = '#FFFFFF'
+fish_style_pwd_dir_length = 3
+
+[character]
+
+[sudo]
+disabled = false
+
+[status]
+format = '[$symbol]($style) '
+# symbol = '-> '`
+disabled = false
+
+[battery]
+format = "[$symbol$percentage]($style) "
+[[battery.display]]
+threshold = 50
+style = "bold red"
+[[battery.display]]
+threshold = 100
+style = "white"
+
+
+# [](#BA1861)\
+# $username\
+# [](bg:#DB4678 fg:#BA1861)\
+# $directory\
+# [](fg:#DB4678 bg:#E87D8C)\
+# $git_branch\
+# $git_status\
