@@ -6,6 +6,7 @@ end
 # Initialize Starship
 starship init fish | source
 set -gx STARSHIP_CONFIG ~/.config/starship/starship.toml
+set -gx EDITOR "code --wait"
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if test -f /home/legendtheo/miniconda3/bin/conda
