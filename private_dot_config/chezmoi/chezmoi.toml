@@ -1,2 +1,8 @@
 [cd]
     command = "fish"
+[merge]
+    command = "code"
+    args = ["--wait", "--merge", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]
+[edit]
+    command = "code"
+    args = ["--wait"]

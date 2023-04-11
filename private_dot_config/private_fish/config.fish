@@ -2,6 +2,9 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# Make pamac work
+set -gx PAMAC_CLI_AUTH 1
+alias pamac = "~/pamac/build/src/pamac"
 
 # Initialize Starship
 starship init fish | source

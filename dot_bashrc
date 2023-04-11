@@ -137,6 +137,14 @@ ex ()
 }
 export BROWSER=wslview
 
+# Setup Starship 
+eval "$(starship init bash)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+# make pamac work
+export PAMAC_CLI_AUTH=1
+alias pamac=~/pamac/build/src/pamac
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/legendtheo/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
