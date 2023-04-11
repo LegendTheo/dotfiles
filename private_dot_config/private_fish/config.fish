@@ -4,7 +4,7 @@ end
 
 # Make pamac work
 set -gx PAMAC_CLI_AUTH 1
-alias pamac = "~/pamac/build/src/pamac"
+alias pamac="~/pamac/build/src/pamac"
 
 # Initialize Starship
 starship init fish | source

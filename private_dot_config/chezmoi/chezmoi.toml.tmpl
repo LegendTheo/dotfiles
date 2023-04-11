@@ -1,0 +1,12 @@
+[cd]
+{{ if eq .chezmoi.os "windows" }}
+    command = "C:\Program Files\PowerShell\7\pwsh.exe"
+{{ else }}
+    command = "fish"
+{{ end }}
+[merge]
+    command = "code"
+    args = ["--wait", "--merge", "{{ "{{" }} .chezmoi.Destination {{ "}}" }}", "{{ "{{" }} .chezmoi.Source {{ "}}" }}", "{{ "{{" }} .chezmoi.Target {{ "}}" }}"]
+[edit]
+    command = "code"
+    args = ["--wait"]
