@@ -217,6 +217,8 @@ format = '[$symbol]($style) '
 # symbol = '-> '`
 disabled = false
 
+{{ if not (eq .chezmoi.os "android") }}
+
 [battery]
 format = "[$symbol$percentage]($style) "
 [[battery.display]]
@@ -226,6 +228,7 @@ style = "bold red"
 threshold = 100
 style = "white"
 
+{{ end }}
 
 # [](#BA1861)\
 # $username\
