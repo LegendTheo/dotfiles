@@ -5,8 +5,8 @@
     command = "fish"
 {{ end }}
 [merge]
-    command = "code"
-    args = ["--wait", "--merge", "{{ "{{" }} .chezmoi.Destination {{ "}}" }}", "{{ "{{" }} .chezmoi.Source {{ "}}" }}", "{{ "{{" }} .chezmoi.Target {{ "}}" }}"]
+    command = "bash"
+    args = ["-c", "cp {{ `{{ .Target }}` }} {{ `{{ .Target }}` }}.base && code-insiders --new-window --wait --merge {{ `{{ .Destination }}` }} {{ `{{ .Target  }}` }} {{ `{{ .Target }}` }}.base {{ `{{ .Source }}` }}"]
 [edit]
     command = "code"
     args = ["--wait"]
