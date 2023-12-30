@@ -145,26 +145,36 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export PAMAC_CLI_AUTH=1
 alias pamac=~/pamac/build/src/pamac
 
+{{ if stat (joinPath .chezmoi.homeDir "miniforge3") }}
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/legendtheo/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+	if [ -f "/home/legendtheo/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/legendtheo/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/legendtheo/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+{{ else if stat (joinPath .chezmoi.homeDir "miniconda3") }}
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/legendtheo/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-	{{ if stat (joinPath .chezmoi.homeDir "miniforge3") }}
-	if [ -f "/home/legendtheo/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/legendtheo/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/legendtheo/miniforge3/bin:$PATH"
-    fi
-	{{ else }}
     if [ -f "/home/legendtheo/miniconda3/etc/profile.d/conda.sh" ]; then
         . "/home/legendtheo/miniconda3/etc/profile.d/conda.sh"
     else
         export PATH="/home/legendtheo/miniconda3/bin:$PATH"
     fi
-	{{ end }}
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+{{ else }}
 
+{{ end }}
