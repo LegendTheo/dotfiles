@@ -34,7 +34,9 @@ ${custom.cpu_mem}\
 [](fg:#575656)\
 ${cmd_duration}\
 [](fg:#575656)\
+{{ if not (eq .chezmoi.os "android") }}
 ${fill}${custom.giturl}$git_branch$git_status$git_metrics${custom.git_end_format}
+{{ end }}
 [╭]()\
 [─]()\
 $shell\
@@ -101,6 +103,8 @@ format = '[$duration]($style)'
 min_time = 0
 style = "fg:#d6deeb bg:#575656"
 
+{{ if not (eq .chezmoi.os "android") }}
+
 [custom.giturl]
 # disabled = true
 description = "Display symbol for remote Git server"
@@ -166,6 +170,8 @@ style = "bg:#17D7A0 fg:#011627"
 up_to_date = "✓"
 disabled = false
 windows_starship = '/mnt/c/Users/LegendTheo/starship.exe'
+
+{{ end }}
 
 [custom.git_end_format]
 command = " "
