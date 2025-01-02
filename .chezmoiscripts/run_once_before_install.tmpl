@@ -32,6 +32,7 @@ elif echo $LSB ~| grep "Arch"; then
 fi
 
 echo "Running Fish"
-fish "fish_setup_script.tmpl"
+echo $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+fish "../fish_setup_script.fish"
 
 {{ end -}}
