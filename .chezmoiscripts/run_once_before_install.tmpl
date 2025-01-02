@@ -31,8 +31,4 @@ elif echo $LSB ~| grep "Arch"; then
     sudo pacman -Syu fish
 fi
 
-echo "Running Fish"
-echo $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-fish "../fish_setup_script.fish"
-
 {{ end -}}
