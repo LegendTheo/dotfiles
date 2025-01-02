@@ -5,20 +5,21 @@ LSB=$(lsb_release -a)
 
 if echo $LSB | grep "Debian"; then
     if uname --all | grep "aarch64"; then
-        cur_dir=$(pwd)
-        cd /tmp
-        wget https://github.com/fish-shell/fish-shell/releases/download/3.6.1/fish-3.6.1.tar.xz
-        tar xf fish-3.6.1.tar.xz -C /tmp
-        apt --assume-yes install build-essential cmake ncurses-dev libncurses5-dev libpcre2-dev gettext
-        cd fish-3.6.1
-        cmake .
-        make
-        sudo make install
-        echo /usr/local/bin/fish | tee -a /etc/shells
-        sudo rm -rf fish-3.6.1
-        cd $cur_dir
-        echo $(pwd)
-        exit
+        sudo apt install fish
+        # cur_dir=$(pwd)
+        # cd /tmp
+        # wget https://github.com/fish-shell/fish-shell/releases/download/3.6.1/fish-3.6.1.tar.xz
+        # tar xf fish-3.6.1.tar.xz -C /tmp
+        # apt --assume-yes install build-essential cmake ncurses-dev libncurses5-dev libpcre2-dev gettext
+        # cd fish-3.6.1
+        # cmake .
+        # make
+        # sudo make install
+        # echo /usr/local/bin/fish | tee -a /etc/shells
+        # sudo rm -rf fish-3.6.1
+        # cd $cur_dir
+        # echo $(pwd)
+        # exit
     fi
 elif echo $LSB | grep "Ubuntu"; then
     sudo apt install fish
