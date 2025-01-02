@@ -13,6 +13,9 @@ wget -O "$FONT_TEMP_DIR/HACK_Font.zip" "https://github.com/ryanoasis/nerd-fonts/
 # Unzip Hack font
 unzip "$FONT_TEMP_DIR/HACK_Font.zip" -d "$FONT_TEMP_DIR"
 
+# make .fonts directory
+mkdir ~/.fonts
+
 # Move font files to the system fonts directory
 sudo mv "$FONT_TEMP_DIR"/*.{ttf,otf} ~/.fonts/
 
