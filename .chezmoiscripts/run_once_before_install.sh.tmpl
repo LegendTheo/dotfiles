@@ -1,6 +1,8 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 
+echo "Installing Fish"
+
 LSB=$(lsb_release -a)
 
 if echo $LSB | grep "Debian"; then
@@ -28,5 +30,8 @@ elif echo  | grep "Manjaro"; then
 elif echo $LSB ~| grep "Arch"; then
     sudo pacman -Syu fish
 fi
+
+echo "Running Fish"
+fish "fish_setup_script.tmpl"
 
 {{ end -}}
