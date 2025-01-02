@@ -1,0 +1,31 @@
+# Install Starship
+curl -sS https://starship.rs/install.sh | sh
+
+# Install hack nerd font
+# create temp dir
+set FONT_TEMP_DIR (mktemp -d)
+
+# Download Hack font
+wget -O "$FONT_TEMP_DIR/HACK_Font.zip" "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip"
+
+# Unzip Hack font
+unzip "$FONT_TEMP_DIR/HACK_Font.zip" -d "$FONT_TEMP_DIR"
+
+# Move font files to the system fonts directory
+sudo mv "$FONT_TEMP_DIR"/*.{ttf,otf} ~/.fonts/
+
+# Update fonts cache
+fc-cache -f -v
+
+# clean up temp
+rm -rf $FONT_TEMP_DIR
+
+# if echo $LSB | grep "Debian"
+
+# else if  echo $LSB | grep "Ubuntu"
+#     sudo apt install fish
+# else if echo  | grep "Manjaro"
+#     sudo pacman -Syu fish
+# else if echo $LSB ~| grep "Arch"
+#     sudo pacman -Syu fish
+# end
