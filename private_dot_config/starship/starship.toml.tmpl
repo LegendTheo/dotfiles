@@ -94,7 +94,7 @@ command = '''echo -n "CPU: $(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($
 shell = "bash"
 when = "true"
 style = "fg:#FFFFFF bg:#516BEB"
-symbol = ""
+symbol = "󰍛"
 
 [cmd_duration]
 format = '[$duration]($style)'
@@ -116,7 +116,7 @@ elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
 elif [[ "$GIT_REMOTE" =~ "codecommit" ]]; then
     GIT_REMOTE_SYMBOL="󰸏"
 elif [[ "$GIT_REMOTE" =~ "git" ]]; then
-    GIT_REMOTE_SYMBOL=" "
+    GIT_REMOTE_SYMBOL="󰊢 "
 else
     GIT_REMOTE_SYMBOL=" "
 fi
@@ -138,7 +138,7 @@ style = "bg:#17D7A0 fg:#011627"
 #     'github'    { $symbol = ' ' }\
 #     'gitlab'    { $symbol = ' ' }\
 #     'bitbucket' { $symbol = ' ' }\
-#      Default    { $symbol = ' ' }\
+#      Default    { $symbol = '󰊢 ' }\
 # }
 # echo $symbol
 # """
@@ -182,7 +182,7 @@ disabled = false
 style = "#FFFFFF"
 
 [shell]
-fish_indicator = '  '
+fish_indicator = ' 󰈺 '
 powershell_indicator = ' ❯_'
 bash_indicator = ' 🔨 '
 style = 'bold #516BEB'
@@ -196,7 +196,7 @@ style_root = "fg: bold-red bg:$FEF5ED"
 [hostname]
 format = '[$ssh_symbol $hostname on ]($style)'
 style = "fg:#000000 bg:#FEF5ED"
-ssh_symbol = ''
+ssh_symbol = '󰌘'
 
 [directory]
 format = '[| $path]($style)[$read_only]($read_only_style) '
